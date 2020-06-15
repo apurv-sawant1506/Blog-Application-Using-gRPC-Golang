@@ -1,0 +1,3 @@
+To compile the .proto file:
+
+protoc blogpb/blog.proto --go_out=plugins=grpc:.

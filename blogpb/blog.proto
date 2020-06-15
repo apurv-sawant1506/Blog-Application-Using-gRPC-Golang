@@ -1,0 +1,54 @@
+syntax="proto3";
+
+package blog;
+
+option go_package="blog/blogpb";
+
+//The id of the blog is system generated, not to be passed by the user.
+
+message Blog {
+    string id = 1;
+    string authod_id = 2;
+    string title = 3;
+    string content = 4;
+}
+
+message CreateBlogRequest {
+    Blog blog = 1; //This blog will not have an id
+}
+
+message CreateBlogResponse {
+    Blog blog = 1; //This blog will have an id.
+}
+
+message ReadBlogRequest{
+    string blog_id = 1;
+}
+
+message ReadBlogResponse{
+    Blog blog = 1;
+}
+
+message UpdateBlogRequest{
+    Blog blog = 1;
+}
+
+message UpdateBlogResponse{
+    Blog blog = 1;
+}
+
+message DeleteBlogRequest{
+    string blog_id = 1;
+}
+
+message DeleteBlogResponse{
+    string blog_id = 1;
+}
+
+
+service BlogService {
+    rpc CreateBlog(CreateBlogRequest) returns (CreateBlogResponse) {};
+    rpc ReadBlog(ReadBlogRequest) returns (ReadBlogResponse) {}; //return NOT_FOUND if not found
+    rpc UpdateBlog(UpdateBlogRequest) returns (UpdateBlogResponse) {}; //return NOT_FOUND if not found
+    rpc DeleteBlog(DeleteBlogRequest) returns (DeleteBlogResponse) {}; //return NOT_FOUND if not found
+}
